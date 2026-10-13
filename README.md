@@ -16,6 +16,8 @@ short_description: GPU reliability lab with telemetry, SLOs, and AI investigatio
 
 GPU FleetOps combines a GPU infrastructure catalog, telemetry, request-based SLOs, incident workflows, and an evidence-grounded investigator. The Gradio reliability lab runs on a CPU laptop.
 
+**[Try the Gradio preview](https://0e237eb02efc0198b9.gradio.live)** — temporary; requires the local demo process to remain running. The repository includes reproducible local setup and permanent Docker Space hosting instructions.
+
 ![GPU FleetOps architecture](src/fleetops/assets/architecture.svg)
 
 ## Run the demo

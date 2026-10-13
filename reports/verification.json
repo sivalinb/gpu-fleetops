@@ -5,8 +5,16 @@
   "failures": 0,
   "errors": 0,
   "line_coverage_percent": 99.2,
-  "scope": "Local application, adapters, API, UI callbacks, provider protocol mocks, persistence, and deployment configuration. Physical GPU, live model, and full container runtime are separate checks.",
+  "scope": "Local and Linux CI application/API/UI/adapters/provider protocol/persistence tests, PostgreSQL container deployment, and verified metrics/log/trace delivery. Physical GPU and live model evaluation are separate checks.",
   "http_smoke": "passed",
   "scenario_evaluation": "7 of 7 expected baseline actions; 6 verified recoveries; 1 intentional abstention",
-  "ci_container_runtime": "Pending GitHub Actions validation"
+  "ci_container_runtime": "passed",
+  "ci_signal_flow": "passed: Prometheus metrics, Loki logs, correlated Tempo spans",
+  "ci_url": "https://github.com/sivalinb/gpu-fleetops/actions/runs/38463069521",
+  "validated_source_commit": "c91551136e7611a2f5adeec8ab4db7644a96ec75",
+  "ci_python_versions": [
+    "3.12",
+    "3.13"
+  ],
+  "browser_recovery": "passed: approval required, 20 verification probes, used proposal disabled, 80 further healthy probes, zero active incidents, historical budget preserved"
 }
