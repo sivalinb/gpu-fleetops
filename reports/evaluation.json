@@ -1,0 +1,94 @@
+{
+  "generated_at": "2026-10-13T20:13:16.351550+00:00",
+  "mode": "deterministic rules baseline",
+  "scope": "Seven synthetic, known scenarios. These are regression evaluations, not a held-out LLM accuracy benchmark or real GPU performance claim.",
+  "scenario_count": 7,
+  "correct_actions": 7,
+  "verified_recoveries": 6,
+  "results": [
+    {
+      "scenario": "gpu_oom",
+      "expected_action": "rollback",
+      "actual_action": "rollback",
+      "correct_action": true,
+      "abstained": false,
+      "citation_ids_resolve": true,
+      "verified_recovery": true,
+      "grouped_alert_count": 2,
+      "wall_seconds": 0.1074,
+      "detection_simulation_seconds": 240
+    },
+    {
+      "scenario": "storage_latency",
+      "expected_action": "restore_storage",
+      "actual_action": "restore_storage",
+      "correct_action": true,
+      "abstained": false,
+      "citation_ids_resolve": true,
+      "verified_recovery": true,
+      "grouped_alert_count": 1,
+      "wall_seconds": 0.1034,
+      "detection_simulation_seconds": 240
+    },
+    {
+      "scenario": "node_down",
+      "expected_action": "restore_node",
+      "actual_action": "restore_node",
+      "correct_action": true,
+      "abstained": false,
+      "citation_ids_resolve": true,
+      "verified_recovery": true,
+      "grouped_alert_count": 2,
+      "wall_seconds": 0.1033,
+      "detection_simulation_seconds": 240
+    },
+    {
+      "scenario": "telemetry_outage",
+      "expected_action": "restore_telemetry",
+      "actual_action": "restore_telemetry",
+      "correct_action": true,
+      "abstained": false,
+      "citation_ids_resolve": true,
+      "verified_recovery": true,
+      "grouped_alert_count": 1,
+      "wall_seconds": 0.1474,
+      "detection_simulation_seconds": 0
+    },
+    {
+      "scenario": "inventory_drift",
+      "expected_action": "reconcile_inventory",
+      "actual_action": "reconcile_inventory",
+      "correct_action": true,
+      "abstained": false,
+      "citation_ids_resolve": true,
+      "verified_recovery": true,
+      "grouped_alert_count": 1,
+      "wall_seconds": 0.0999,
+      "detection_simulation_seconds": 0
+    },
+    {
+      "scenario": "alert_storm",
+      "expected_action": "rollback",
+      "actual_action": "rollback",
+      "correct_action": true,
+      "abstained": false,
+      "citation_ids_resolve": true,
+      "verified_recovery": true,
+      "grouped_alert_count": 52,
+      "wall_seconds": 0.1639,
+      "detection_simulation_seconds": 240
+    },
+    {
+      "scenario": "unknown",
+      "expected_action": "none",
+      "actual_action": "none",
+      "correct_action": true,
+      "abstained": true,
+      "citation_ids_resolve": true,
+      "verified_recovery": null,
+      "grouped_alert_count": 2,
+      "wall_seconds": 0.0699,
+      "detection_simulation_seconds": 240
+    }
+  ]
+}

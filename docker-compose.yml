@@ -1,0 +1,95 @@
+services:
+  app:
+    build: .
+    ports: ["127.0.0.1:7860:7860"]
+    environment:
+      FLEETOPS_DATABASE_URL: postgresql+psycopg://fleetops:${POSTGRES_PASSWORD:?Run python scripts/setup_env.py first}@postgres:5432/fleetops
+      FLEETOPS_API_TOKEN: ${FLEETOPS_API_TOKEN:-}
+      FLEETOPS_AI_MODE: ${FLEETOPS_AI_MODE:-baseline}
+      FLEETOPS_AI_BASE_URL: ${FLEETOPS_AI_BASE_URL:-https://integrate.api.nvidia.com/v1}
+      FLEETOPS_AI_MODEL: ${FLEETOPS_AI_MODEL:-}
+      FLEETOPS_AI_API_KEY: ${FLEETOPS_AI_API_KEY:-}
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://otel-collector:4318
+      FLEETOPS_LOG_PATH: /data/telemetry.jsonl
+    volumes: ["app-data:/data"]
+    depends_on:
+      postgres: {condition: service_healthy}
+    restart: unless-stopped
+    read_only: true
+    tmpfs: ["/tmp", "/home/fleetops/.cache"]
+  postgres:
+    image: postgres:17-alpine@sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24
+    environment:
+      POSTGRES_USER: fleetops
+      POSTGRES_DB: fleetops
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Run python scripts/setup_env.py first}
+    volumes: ["postgres-data:/var/lib/postgresql/data"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U fleetops -d fleetops"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+  otel-collector:
+    profiles: ["observability"]
+    image: otel/opentelemetry-collector-contrib:0.137.0@sha256:886722fe0f37af9d1fe24d29529253ec59fbf263b3b1df4facaf221373e19d23
+    user: "10001:10001"
+    command: ["--config=/etc/otel/config.yml"]
+    volumes:
+      - ./observability/otel-collector.yml:/etc/otel/config.yml:ro
+      - app-data:/data:ro
+      - collector-data:/var/lib/otelcol
+    depends_on:
+      loki: {condition: service_started}
+      tempo: {condition: service_started}
+      collector-init: {condition: service_completed_successfully}
+  collector-init:
+    profiles: ["observability"]
+    image: busybox:1.37.0@sha256:bdf57e528e45e4433820e045b29b4597825a1c9e38353532d90a01445013f82e
+    command: ["sh", "-c", "chown 10001:10001 /state"]
+    volumes: ["collector-data:/state"]
+  prometheus:
+    profiles: ["observability"]
+    image: prom/prometheus:v3.7.1@sha256:ff7e389acbe064a4823212a500393d40a28a8f362e4b05cbf6742a9a3ef736b2
+    command: ["--config.file=/etc/prometheus/prometheus.yml", "--storage.tsdb.retention.time=7d"]
+    ports: ["127.0.0.1:9090:9090"]
+    volumes:
+      - ./observability/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./observability/alerts.yml:/etc/prometheus/alerts.yml:ro
+      - prometheus-data:/prometheus
+  loki:
+    profiles: ["observability"]
+    image: grafana/loki:3.5.5@sha256:31628519045e7f28692a7ae73b4a3fd293dccb425585ed5d16ceea3b5c9592e6
+    command: ["-config.file=/etc/loki/config.yml"]
+    volumes:
+      - ./observability/loki.yml:/etc/loki/config.yml:ro
+      - loki-data:/loki
+  tempo:
+    profiles: ["observability"]
+    image: grafana/tempo:2.9.0@sha256:65a5789759435f1ef696f1953258b9bbdb18eb571d5ce711ff812d2e128288a4
+    command: ["-config.file=/etc/tempo/config.yml"]
+    volumes:
+      - ./observability/tempo.yml:/etc/tempo/config.yml:ro
+      - tempo-data:/var/tempo
+  grafana:
+    profiles: ["observability"]
+    image: grafana/grafana:12.2.0@sha256:74144189b38447facf737dfd0f3906e42e0776212bf575dc3334c3609183adf7
+    ports: ["127.0.0.1:3000:3000"]
+    environment:
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+      GF_AUTH_ANONYMOUS_ORG_ROLE: Viewer
+      GF_AUTH_DISABLE_LOGIN_FORM: "true"
+      GF_SECURITY_ADMIN_PASSWORD: ${POSTGRES_PASSWORD:?Run setup_env.py first}
+    volumes:
+      - ./observability/grafana/datasources.yml:/etc/grafana/provisioning/datasources/fleetops.yml:ro
+      - ./observability/grafana/dashboard-provider.yml:/etc/grafana/provisioning/dashboards/fleetops.yml:ro
+      - ./observability/grafana/fleetops.json:/var/lib/grafana/dashboards/fleetops.json:ro
+      - grafana-data:/var/lib/grafana
+    depends_on: [prometheus, loki, tempo]
+volumes:
+  app-data:
+  postgres-data:
+  collector-data:
+  prometheus-data:
+  loki-data:
+  tempo-data:
+  grafana-data:

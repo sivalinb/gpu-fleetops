@@ -1,0 +1,39 @@
+groups:
+  - name: fleetops-slo
+    rules:
+      - record: fleetops:availability_error_ratio:5m
+        expr: sum by (service) (rate(fleetops_inference_requests_total{outcome="failure"}[5m])) / clamp_min(sum by (service) (rate(fleetops_inference_requests_total[5m])), 0.000001)
+      - record: fleetops:availability_error_ratio:1h
+        expr: sum by (service) (rate(fleetops_inference_requests_total{outcome="failure"}[1h])) / clamp_min(sum by (service) (rate(fleetops_inference_requests_total[1h])), 0.000001)
+      - record: fleetops:latency_error_ratio:5m
+        expr: 1 - sum by (service) (rate(fleetops_inference_latency_seconds_bucket{outcome="success",le="0.3"}[5m])) / clamp_min(sum by (service) (rate(fleetops_inference_requests_total[5m])), 0.000001)
+      - record: fleetops:latency_error_ratio:1h
+        expr: 1 - sum by (service) (rate(fleetops_inference_latency_seconds_bucket{outcome="success",le="0.3"}[1h])) / clamp_min(sum by (service) (rate(fleetops_inference_requests_total[1h])), 0.000001)
+      - alert: FleetOpsAvailabilityFastBurn
+        expr: (fleetops:availability_error_ratio:1h / 0.005 > 14.4) and (fleetops:availability_error_ratio:5m / 0.005 > 14.4) and (sum by (service) (increase(fleetops_inference_requests_total[1h])) >= 20) and (sum by (service) (increase(fleetops_inference_requests_total[5m])) >= 10)
+        for: 30s
+        labels: {severity: critical, owner: ml-platform}
+        annotations:
+          summary: Inference availability is consuming its error budget rapidly
+          runbook: docs/RUNBOOKS.md
+      - alert: FleetOpsLatencyFastBurn
+        expr: (fleetops:latency_error_ratio:1h / 0.01 > 14.4) and (fleetops:latency_error_ratio:5m / 0.01 > 14.4) and (sum by (service) (increase(fleetops_inference_requests_total[1h])) >= 20) and (sum by (service) (increase(fleetops_inference_requests_total[5m])) >= 10)
+        for: 30s
+        labels: {severity: warning, owner: storage-platform}
+        annotations:
+          summary: Inference latency is consuming its error budget rapidly
+          runbook: docs/RUNBOOKS.md
+      - alert: FleetOpsScrapeUnavailable
+        expr: up{job="fleetops"} == 0
+        for: 1m
+        labels: {severity: critical, owner: observability-platform}
+        annotations: {summary: FleetOps metrics endpoint cannot be scraped}
+      - alert: FleetOpsTelemetryQueueNearCapacity
+        expr: fleetops_telemetry_queue_size > 800
+        for: 30s
+        labels: {severity: warning, owner: observability-platform}
+        annotations: {summary: Telemetry outbox is approaching capacity}
+      - alert: FleetOpsTelemetryDropped
+        expr: increase(fleetops_telemetry_dropped_total[5m]) > 0
+        labels: {severity: critical, owner: observability-platform}
+        annotations: {summary: Telemetry records were dropped and require investigation}

@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900" role="img" aria-labelledby="title desc">
+<title id="title">GPU FleetOps — architecture and incident lifecycle</title>
+<desc id="desc">Fleet adapters populate telemetry and inventory. SLO policies create owned incidents. A bounded read-only AI investigator retrieves evidence and proposes a runbook. An operator approves recovery, which is verified by probes. Metrics, logs, and traces reach the observability stack.</desc>
+<defs>
+<linearGradient id="bg" x2="1" y2="1"><stop stop-color="#0b1726"/><stop offset="1" stop-color="#103b37"/></linearGradient>
+<marker id="arrow" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8" fill="none" stroke="#81dcb7" stroke-width="1.8"/></marker>
+<style>text{font-family:Inter,Arial,sans-serif}.title{fill:#fff;font-size:32px;font-weight:700}.sub{fill:#acc8c6;font-size:15px}.h{fill:#f4fbf7;font-size:20px;font-weight:650}.body{fill:#b9d2cc;font-size:14px}.tag{fill:#81e6bb;font-size:11px;font-weight:600;letter-spacing:1.4px}.box{fill:#112b32;stroke:#3e6461;stroke-width:1.3;rx:16}.line{fill:none;stroke:#81dcb7;stroke-width:2;marker-end:url(#arrow)}.note{fill:#a3bcb9;font-size:12px}</style>
+</defs>
+<rect width="1440" height="900" rx="24" fill="url(#bg)"/>
+<text x="52" y="54" class="tag">GPU FLEETOPS / SYSTEM DESIGN</text>
+<text x="52" y="101" class="title">One operational picture. A verified path to recovery.</text>
+<text x="52" y="135" class="sub">Inventory identifies the affected infrastructure. Telemetry supplies the evidence. Policies control the response.</text>
+
+<rect x="50" y="185" width="390" height="150" class="box"/>
+<text x="72" y="214" class="tag">01 / DISCOVER &amp; GENERATE</text>
+<text x="72" y="247" class="h">Fleet and workload adapters</text>
+<text x="72" y="276" class="body">CPU inference + synthetic GPU failure drills</text>
+<text x="72" y="301" class="body">Real inputs: Kubernetes NodeList + DCGM</text>
+
+<rect x="525" y="185" width="390" height="150" class="box"/>
+<text x="547" y="214" class="tag">02 / OBSERVE</text>
+<text x="547" y="247" class="h">Telemetry and durable outbox</text>
+<text x="547" y="276" class="body">Metrics · logs · traces · deployment events</text>
+<text x="547" y="301" class="body">Bounded queue · atomic replay · drop counters</text>
+
+<rect x="1000" y="185" width="390" height="150" class="box"/>
+<text x="1022" y="214" class="tag">03 / IDENTIFY</text>
+<text x="1022" y="247" class="h">Inventory and service catalog</text>
+<text x="1022" y="276" class="body">Cluster → node → GPU → service → owner</text>
+<text x="1022" y="301" class="body">Reconciliation · provenance · stale-data flags</text>
+<path d="M440 261H518" class="line"/>
+<path d="M245 335V365H1195V343" class="line"/>
+
+<rect x="50" y="410" width="390" height="155" class="box"/>
+<text x="72" y="439" class="tag">04 / DETECT &amp; ROUTE</text>
+<text x="72" y="473" class="h">SLIs, SLOs, and incident workflow</text>
+<text x="72" y="503" class="body">Availability + latency · paired burn windows</text>
+<text x="72" y="528" class="body">Deduplication · owners · escalation · maintenance</text>
+
+<rect x="525" y="410" width="390" height="155" class="box"/>
+<text x="547" y="439" class="tag">05 / INVESTIGATE</text>
+<text x="547" y="473" class="h">Read-only agent tool loop</text>
+<text x="547" y="503" class="body">Incident · evidence · inventory · SLO · runbooks</text>
+<text x="547" y="528" class="body">Cited hypotheses · bounded steps · abstention</text>
+
+<rect x="1000" y="410" width="390" height="155" class="box"/>
+<text x="1022" y="439" class="tag">06 / APPROVE &amp; VERIFY</text>
+<text x="1022" y="473" class="h">Runbook recovery and learning</text>
+<text x="1022" y="503" class="body">Explicit approval · revision check · allowed actions</text>
+<text x="1022" y="528" class="body">20 verification probes · timeline · incident report</text>
+<path d="M620 335V387H245V402" class="line"/>
+<path d="M1195 335V385H820V402" class="line"/>
+<path d="M440 490H518" class="line"/>
+<path d="M915 490H993" class="line"/>
+<path d="M1195 565V597H27V260H42" class="line"/>
+<text x="52" y="624" class="note">Verified recovery closes the incident; failed requests remain in the error budget.</text>
+
+<rect x="50" y="645" width="650" height="145" class="box"/>
+<text x="72" y="674" class="tag">OPERATOR EXPERIENCE</text>
+<text x="72" y="707" class="h">Gradio demo + FastAPI operator API</text>
+<text x="72" y="737" class="body">Isolated sessions · catalog · SLO dashboard · evidence · incident report</text>
+<text x="72" y="764" class="body">SQLAlchemy persistence: SQLite locally / PostgreSQL deployment profile</text>
+
+<rect x="740" y="645" width="650" height="145" class="box"/>
+<text x="762" y="674" class="tag">OBSERVABILITY PROFILE / DOCKER COMPOSE</text>
+<text x="762" y="707" class="h">Prometheus + Loki + Tempo + Grafana</text>
+<text x="762" y="737" class="body">Prometheus scrape · JSON logs + OTLP traces via OTel Collector</text>
+<text x="762" y="764" class="body">Provisioned dashboards · service metrics · alert rules · trace links</text>
+<path d="M915 308H960V615H1065V638" class="line"/>
+<text x="52" y="840" class="note">PUBLIC DEMO: GPU measurements and fleet environments are synthetic. CPU inference and operational workflows execute.</text>
+<text x="52" y="865" class="note">BASELINE: deterministic rules, explicitly labeled. LIVE AI: server-side provider configuration and a bounded read-only tool loop.</text>
+</svg>

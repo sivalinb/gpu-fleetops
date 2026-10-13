@@ -1,0 +1,42 @@
+[
+  {
+    "image": "otel/opentelemetry-collector-contrib:0.137.0",
+    "status": 200,
+    "digest": "sha256:886722fe0f37af9d1fe24d29529253ec59fbf263b3b1df4facaf221373e19d23"
+  },
+  {
+    "image": "prom/prometheus:v3.7.1",
+    "status": 200,
+    "digest": "sha256:ff7e389acbe064a4823212a500393d40a28a8f362e4b05cbf6742a9a3ef736b2"
+  },
+  {
+    "image": "grafana/loki:3.5.5",
+    "status": 200,
+    "digest": "sha256:31628519045e7f28692a7ae73b4a3fd293dccb425585ed5d16ceea3b5c9592e6"
+  },
+  {
+    "image": "grafana/tempo:2.9.0",
+    "status": 200,
+    "digest": "sha256:65a5789759435f1ef696f1953258b9bbdb18eb571d5ce711ff812d2e128288a4"
+  },
+  {
+    "image": "grafana/grafana:12.2.0",
+    "status": 200,
+    "digest": "sha256:74144189b38447facf737dfd0f3906e42e0776212bf575dc3334c3609183adf7"
+  },
+  {
+    "image": "library/busybox:1.37.0",
+    "status": 200,
+    "digest": "sha256:bdf57e528e45e4433820e045b29b4597825a1c9e38353532d90a01445013f82e"
+  },
+  {
+    "image": "library/postgres:17-alpine",
+    "status": 200,
+    "digest": "sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24"
+  },
+  {
+    "image": "library/python:3.12-slim",
+    "status": 200,
+    "digest": "sha256:a6e34c598f2467ed0e9a8d349809fcd8b5c603269512df273a0bb1784edc11b1"
+  }
+]

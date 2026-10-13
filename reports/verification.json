@@ -1,0 +1,12 @@
+{
+  "date": "2026-10-13T20:17:08.573484+00:00",
+  "python": "3.12.14",
+  "tests": 176,
+  "failures": 0,
+  "errors": 0,
+  "line_coverage_percent": 99.2,
+  "scope": "Local application, adapters, API, UI callbacks, provider protocol mocks, persistence, and deployment configuration. Physical GPU, live model, and full container runtime are separate checks.",
+  "http_smoke": "passed",
+  "scenario_evaluation": "7 of 7 expected baseline actions; 6 verified recoveries; 1 intentional abstention",
+  "ci_container_runtime": "Pending GitHub Actions validation"
+}

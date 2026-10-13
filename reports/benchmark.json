@@ -1,0 +1,11 @@
+{
+  "platform": "macOS-26.6.2-arm64-arm-64bit",
+  "python": "3.12.14",
+  "logical_gpu_records": 1000,
+  "catalog_seconds": 0.6097,
+  "catalog_records_per_second": 1640.18,
+  "probes": 500,
+  "probe_seconds": 0.6686,
+  "probes_per_second": 747.78,
+  "scope": "Single-process synthetic catalog and workload on this machine. Includes synchronous persistence and evidence creation. Does not measure physical GPU or distributed fleet performance."
+}

@@ -1,0 +1,62 @@
+apiVersion: v1
+kind: Namespace
+metadata: {name: fleetops}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata: {name: fleetops-data, namespace: fleetops}
+spec:
+  accessModes: [ReadWriteOnce]
+  resources:
+    requests: {storage: 2Gi}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata: {name: fleetops, namespace: fleetops}
+spec:
+  replicas: 1
+  strategy: {type: Recreate}
+  selector:
+    matchLabels: {app: fleetops}
+  template:
+    metadata:
+      labels: {app: fleetops}
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "7860"
+    spec:
+      securityContext: {runAsNonRoot: true, runAsUser: 1000, fsGroup: 1000}
+      containers:
+        - name: fleetops
+          image: ghcr.io/sivalinb/gpu-fleetops:latest
+          ports: [{containerPort: 7860}]
+          env:
+            - {name: FLEETOPS_DATABASE_URL, value: "sqlite:////data/fleetops.db"}
+            - {name: FLEETOPS_AI_MODE, value: baseline}
+            - name: FLEETOPS_API_TOKEN
+              valueFrom:
+                secretKeyRef: {name: fleetops-operator, key: api-token, optional: true}
+          resources:
+            requests: {cpu: "250m", memory: 512Mi}
+            limits: {cpu: "2", memory: 2Gi}
+          readinessProbe:
+            httpGet: {path: /readyz, port: 7860}
+            initialDelaySeconds: 20
+            periodSeconds: 10
+          livenessProbe:
+            httpGet: {path: /healthz, port: 7860}
+            initialDelaySeconds: 60
+            periodSeconds: 15
+          volumeMounts: [{name: data, mountPath: /data}]
+          securityContext: {allowPrivilegeEscalation: false, capabilities: {drop: [ALL]}}
+      volumes:
+        - name: data
+          persistentVolumeClaim: {claimName: fleetops-data}
+---
+apiVersion: v1
+kind: Service
+metadata: {name: fleetops, namespace: fleetops}
+spec:
+  selector: {app: fleetops}
+  ports: [{port: 7860, targetPort: 7860}]
+  type: ClusterIP

@@ -1,0 +1,45 @@
+extensions:
+  file_storage:
+    directory: /var/lib/otelcol
+receivers:
+  otlp:
+    protocols:
+      http: {endpoint: "0.0.0.0:4318"}
+  filelog:
+    include: [/data/telemetry.jsonl]
+    start_at: beginning
+    storage: file_storage
+    operators:
+      - type: json_parser
+        parse_from: body
+processors:
+  memory_limiter:
+    check_interval: 1s
+    limit_mib: 128
+    spike_limit_mib: 32
+  resource:
+    attributes:
+      - key: service.name
+        value: gpu-fleetops
+        action: upsert
+  batch: {timeout: 2s, send_batch_size: 256}
+exporters:
+  otlphttp/tempo:
+    endpoint: http://tempo:4318
+    sending_queue: {storage: file_storage, queue_size: 1000}
+    retry_on_failure: {max_elapsed_time: 10m}
+  otlphttp/loki:
+    endpoint: http://loki:3100/otlp
+    sending_queue: {storage: file_storage, queue_size: 1000}
+    retry_on_failure: {max_elapsed_time: 10m}
+service:
+  extensions: [file_storage]
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [memory_limiter, resource, batch]
+      exporters: [otlphttp/tempo]
+    logs:
+      receivers: [filelog]
+      processors: [memory_limiter, resource, batch]
+      exporters: [otlphttp/loki]

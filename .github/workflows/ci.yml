@@ -1,0 +1,47 @@
+name: CI
+on:
+  push:
+  pull_request:
+permissions: {contents: read}
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: {python: ['3.12', '3.13']}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+          cache: pip
+      - run: pip install -r requirements-dev.txt
+      - run: pip install --no-deps -e .
+      - run: ruff check src tests scripts
+      - run: pytest --cov=fleetops --cov-report=xml --cov-report=term-missing --junitxml=test-results/junit.xml
+      - run: python scripts/evaluate.py --output reports/ci-evaluation.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: evidence-python-${{ matrix.python }}
+          path: |
+            coverage.xml
+            test-results/junit.xml
+            reports/ci-evaluation.json
+  container-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python scripts/setup_env.py
+      - run: docker compose --profile observability config --quiet
+      - run: docker compose --profile observability up --build --wait --wait-timeout 240
+      - run: pip install httpx
+      - run: |
+          set -a
+          source .env
+          set +a
+          python scripts/smoke.py
+          curl --fail http://127.0.0.1:9090/-/ready
+          curl --fail http://127.0.0.1:3000/api/health
+      - if: failure()
+        run: docker compose --profile observability logs --tail 100
+      - if: always()
+        run: docker compose --profile observability down
