@@ -11,11 +11,12 @@ Verified locally on October 13, 2026 with Python 3.12.14.
 | Scenario evaluation | 7/7 expected deterministic baseline actions; six verified recoveries; one intentional abstention. |
 | Synthetic local benchmark | 1,000 logical GPU catalog records and 500 probes; timing and scope recorded. |
 | Container image manifests | All eight deployment/base/helper images verified in the public registry and pinned by digest. |
+| GitHub CI | Python 3.12 and 3.13 tests and the complete container-startup/HTTP smoke job passed: [verified run](https://github.com/sivalinb/gpu-fleetops/actions/runs/38461939934). |
 | Browser | Public Gradio memory-failure drill, citations, approval rejection, approved recovery, and budget history exercised. A recurrence issue found here has a dedicated regression test. |
 
 ## Environment-dependent checks
 
-The authoring machine has no Docker runtime or physical NVIDIA GPU. Container-stack startup, PostgreSQL integration, and external Grafana/Loki/Tempo operation are covered by a separate GitHub Actions container-smoke job; check that run's actual result before claiming it passed. Kubernetes deployment is supplied and structurally checked, not applied to a real cluster here.
+The authoring machine has no Docker runtime or physical NVIDIA GPU. GitHub Actions successfully built and started the PostgreSQL/observability stack and passed its HTTP smoke checks. A further signal-flow smoke script verifies that metrics reach Prometheus, logs reach Loki, and matching spans reach Tempo; its final run is recorded in the machine-readable report. Kubernetes deployment is structurally checked, not applied to a real cluster here.
 
 The real model tool protocol is tested with scripted responses and HTTP mock transports. A live provider call was not made because no project provider key/model was supplied. The public demo runs the clearly labeled rules baseline. A held-out live-model benchmark and independent operator drill are not claimed.
 

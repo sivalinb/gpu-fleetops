@@ -20,6 +20,8 @@ Grafana provides an anonymous **local viewer** for the portfolio dashboard. Ther
 
 For HTTP smoke testing, load the generated local environment and run `python scripts/smoke.py`. It verifies the Gradio route, health/readiness, a full incident lifecycle, and metrics.
 
+Run `docker compose exec -T app python - < scripts/observability_smoke.py` to verify actual signal arrival: Prometheus counters, Loki logs containing the probe trace ID, and matching spans in Tempo. CI includes this check.
+
 The complete observability profile is the documented Compose configuration. Running only the application through plain Docker or Python works without external backends when `OTEL_EXPORTER_OTLP_ENDPOINT` is unset.
 
 ## Operator API

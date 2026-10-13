@@ -41,6 +41,7 @@ jobs:
           python scripts/smoke.py
           curl --fail http://127.0.0.1:9090/-/ready
           curl --fail http://127.0.0.1:3000/api/health
+      - run: docker compose exec -T app python - < scripts/observability_smoke.py
       - if: failure()
         run: docker compose --profile observability logs --tail 100
       - if: always()
