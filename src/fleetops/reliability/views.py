@@ -68,7 +68,7 @@ def figures(bundle):
         )
     layout(
         cohort,
-        "Driver cohorts · raw rates + Poisson 95% intervals",
+        "Driver interruption rates",
         "Interruptions / 1,000 GPU-hours",
     )
     pareto = go.Figure(
@@ -78,7 +78,7 @@ def figures(bundle):
             marker_color=COLORS,
         )
     )
-    layout(pareto, "Where useful time was lost", "Lost observed GPU-hours")
+    layout(pareto, "Lost time by failure domain", "Lost observed GPU-hours")
     survival = go.Figure()
     rows = a["survival"]
     x = [r["hours"] for r in rows]
@@ -106,7 +106,7 @@ def figures(bundle):
         line={"color": COLORS[0], "shape": "hv", "width": 3},
     )
     layout(
-        survival, "Time to first interruption · right-censored", "Probability of no interruption"
+        survival, "Time to first interruption", "Probability of no interruption"
     )
     survival.update_layout(xaxis_title="Observed operating hours", yaxis_range=[0, 1.02])
     experiment = go.Figure()
@@ -120,7 +120,7 @@ def figures(bundle):
         )
     layout(
         experiment,
-        "Mitigation trial · synthetic randomized canary",
+        "Randomized mitigation trial",
         "Interruptions / 1,000 GPU-hours",
     )
     prediction = go.Figure()
@@ -132,7 +132,7 @@ def figures(bundle):
             y=[row["precision"], row["recall"]],
             marker_color=color,
         )
-    layout(prediction, "Prediction · held-out provider and later time", "Fraction")
+    layout(prediction, "Prediction on held-out devices", "Fraction")
     prediction.update_yaxes(range=[0, 1])
     return cohort, pareto, survival, experiment, prediction
 

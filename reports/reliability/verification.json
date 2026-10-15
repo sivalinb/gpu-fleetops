@@ -11,8 +11,19 @@
     "scope": "Ten additional seeds in the same synthetic generator family"
   },
   "physical_gpu": "unavailable: dcgmi not installed",
-  "browser_render": "Local browser preview returned a blank page; interactive browser rendering not verified in this run",
+  "browser_render": {
+    "published_explorer": "Verified at 1280x900 and 390x844: five charts rendered, architecture loaded, chart zoom/reset changed axis ticks, readiness disclosure opened; no page-level horizontal overflow",
+    "local_gradio": "Local browser preview remained blank; HTTP and callback contracts verified"
+  },
   "ui_contract": "FastAPI TestClient mounts Gradio and exercises callback contracts; HTTP app returns 200",
   "figures": "Matplotlib SVG/PNG exported; PNG visually inspected",
-  "scope": "New reliability extension results; earlier v1.0 stack CI is historical evidence"
+  "scope": "New reliability extension results; earlier v1.0 stack CI is historical evidence",
+  "github_ci": {
+    "commit": "5cc52df1cc6a382572f3abe63693bfebf64570cb",
+    "url": "https://github.com/sivalinb/gpu-fleetops/actions/runs/38673271230",
+    "python_3_12": "success",
+    "python_3_13": "success",
+    "container_smoke": "success"
+  },
+  "installation": "Editable package 1.1.0 built and installed successfully"
 }

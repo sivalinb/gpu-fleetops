@@ -10,7 +10,10 @@ Recorded October 14, 2026 (America/Denver), Python 3.12.14 on macOS ARM64.
 - Matplotlib exported SVG and PNG figures; the PNG was visually inspected.
 - Authenticated API tests cover persistence, session isolation, bounded requests and readiness decisions.
 - The Gradio application mounted and its callback contracts passed; the local HTTP application returned 200.
-- The computer-use browser preview displayed a blank page, so browser rendering, interactive Plotly behavior and responsive layout are **not verified by this run**. No browser screenshot is presented as successful UI evidence.
+- The published experiment explorer rendered all five Plotly charts and the architecture at 1280×900 and 390×844. Chart zoom/reset changed the displayed axis ticks, and the readiness disclosure opened. Both viewport widths had no page-level horizontal overflow.
+- The **local Gradio** browser preview remained blank; its HTTP and callback contracts were verified separately. Published-explorer screenshots are not represented as local Gradio evidence.
+- Package 1.1.0 built and installed successfully.
+- [GitHub CI](https://github.com/sivalinb/gpu-fleetops/actions/runs/38673271230) passed Python 3.12, Python 3.13 and the full Docker observability-stack smoke job for implementation commit `5cc52df`.
 - The native GPU runner recorded **unavailable** because `dcgmi` is not installed. Native subprocess behavior is fixture-tested; it does not establish physical GPU operation.
 - No independent engineer or CSP reviewed these results.
 
