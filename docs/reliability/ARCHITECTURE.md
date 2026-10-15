@@ -27,3 +27,7 @@ The existing optional LLM investigator can retrieve evidence and propose allowli
 Prometheus adds completed replay count, replay duration, and the latest synthetic interruption/exposure/unknown totals. Labels have bounded values; source event IDs and GPU IDs do not become labels on the new reliability metrics. An OpenTelemetry `reliability.replay` span and a structured completion log carry provenance and fleet size.
 
 The app is a bounded reference implementation with one application worker, not a distributed fleet analytics backend. Public replay size is capped at 1,500 logical GPUs and two concurrent runs. Authenticated canonical imports allow up to 5,000 entities and 50,000 events. Production work would require streaming ingestion, durable partitions, strict tenant boundaries, late-event policy, data retention, cohort changes over time and customer-agreed statistical standards.
+
+## Frontend asset routing
+
+Application-owned SVGs use `/fleetops-assets/`. Gradio owns `/assets/` for its JavaScript and CSS. A regression test extracts the real frontend bundle URLs from the served HTML and requests each bundle, preventing a static-route collision from silently leaving the UI blank.

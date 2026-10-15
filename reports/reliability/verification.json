@@ -1,7 +1,7 @@
 {
   "date_local": "2026-10-14",
   "python": "3.12.14",
-  "tests": 207,
+  "tests": 208,
   "failures": 0,
   "errors": 0,
   "line_coverage_percent": 98.32810867293625,
@@ -13,7 +13,7 @@
   "physical_gpu": "unavailable: dcgmi not installed",
   "browser_render": {
     "published_explorer": "Verified at 1280x900 and 390x844: five charts rendered, architecture loaded, chart zoom/reset changed axis ticks, readiness disclosure opened; no page-level horizontal overflow",
-    "local_gradio": "Local browser preview remained blank; HTTP and callback contracts verified"
+    "local_gradio": "Verified: actual frontend JS/CSS return 200; changed seed to 2027 and logical GPUs to 100; UI displayed 68 interruption episodes, 244.9 h MTBI and 70.3 lost GPU-hours"
   },
   "ui_contract": "FastAPI TestClient mounts Gradio and exercises callback contracts; HTTP app returns 200",
   "figures": "Matplotlib SVG/PNG exported; PNG visually inspected",
@@ -25,5 +25,6 @@
     "python_3_13": "success",
     "container_smoke": "success"
   },
-  "installation": "Editable package 1.1.0 built and installed successfully"
+  "installation": "Editable package 1.1.0 built and installed successfully",
+  "frontend_regression": "Gradio frontend bundle requests and app-owned SVG tested through actual served routes"
 }

@@ -27,6 +27,10 @@ Open http://127.0.0.1:7860. The first tab is **Reliability intelligence**. It lo
 
 No GPU, paid cloud account or LLM key is needed for this replay.
 
+![Actual Gradio run: seed 2027, 100 logical GPUs](figures/gradio-working.jpg)
+
+The capture above is the running local application after changing the seed and fleet size. It shows 100 logical GPUs and 68 interruption episodes for that replay.
+
 ## Reproduce the evidence
 
 ```bash

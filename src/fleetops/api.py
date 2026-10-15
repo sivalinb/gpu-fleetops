@@ -156,7 +156,7 @@ def create_app(settings: Settings | None = None, *, mount_ui: bool = True) -> Fa
     def evidence(current=Depends(lab)):
         return current.store.list(current.namespace, "evidence", limit=100)
 
-    app.mount("/assets", StaticFiles(directory=Path(__file__).parent / "assets"), name="assets")
+    app.mount("/fleetops-assets", StaticFiles(directory=Path(__file__).parent / "assets"), name="fleetops-assets")
     @app.post("/api/v1/reliability/replay")
     def replay_reliability(payload: SimulationRequest, current=Depends(lab)):
         return service.reliability_replay(payload.seed, payload.assets, current.namespace)

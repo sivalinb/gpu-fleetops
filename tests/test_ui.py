@@ -1,4 +1,5 @@
 import json
+import re
 
 import pytest
 from fastapi.testclient import TestClient
@@ -6,6 +7,21 @@ from fastapi.testclient import TestClient
 from fleetops.api import create_app
 from fleetops.config import Settings
 from fleetops.ui import Presenter, diagnosis_markdown, percentage
+
+
+@pytest.mark.ui
+def test_gradio_frontend_bundles_load_without_static_asset_route_collision():
+    app = create_app(Settings(database_url="sqlite:///:memory:"))
+    app.state.service.telemetry.logger.disabled = True
+    with TestClient(app) as client:
+        document = client.get("/").text
+        bundles = re.findall(r'(?:src|href)="(\./assets/[^"?]+\.(?:js|css))"', document)
+        assert len(bundles) >= 2, "The actual frontend JS and CSS must be discovered"
+        for path in bundles:
+            response = client.get(path.removeprefix("."))
+            assert response.status_code == 200, path
+            assert len(response.content) > 100
+        assert client.get("/fleetops-assets/architecture.svg").status_code == 200
 
 
 @pytest.mark.ui

@@ -99,6 +99,6 @@ def test_alert_and_maintenance_api(client, headers):
 
 def test_openapi_and_architecture(client):
     assert "/api/v1/recovery" in client.get("/api/openapi.json").json()["paths"]
-    response = client.get("/assets/architecture.svg")
+    response = client.get("/fleetops-assets/architecture.svg")
     assert response.status_code == 200
     assert "GPU FleetOps" in response.text

@@ -2,7 +2,7 @@
 
 Recorded October 14, 2026 (America/Denver), Python 3.12.14 on macOS ARM64.
 
-- **207 tests passed**, zero failures/errors.
+- **208 tests passed**, zero failures/errors.
 - **98.33% line coverage**, above the repository's 85% requirement.
 - Ruff checks passed for source, tests and scripts.
 - Ten additional replay seeds produced **40/40** expected domain outcomes within the same synthetic generator family.
@@ -11,7 +11,8 @@ Recorded October 14, 2026 (America/Denver), Python 3.12.14 on macOS ARM64.
 - Authenticated API tests cover persistence, session isolation, bounded requests and readiness decisions.
 - The Gradio application mounted and its callback contracts passed; the local HTTP application returned 200.
 - The published experiment explorer rendered all five Plotly charts and the architecture at 1280×900 and 390×844. Chart zoom/reset changed the displayed axis ticks, and the readiness disclosure opened. Both viewport widths had no page-level horizontal overflow.
-- The **local Gradio** browser preview remained blank; its HTTP and callback contracts were verified separately. Published-explorer screenshots are not represented as local Gradio evidence.
+- The **local Gradio** application rendered after correcting a static-asset route collision. Real frontend JS/CSS requests return 200. A browser run changed the seed to 2027 and fleet size to 100, then calculated 68 interruption episodes, 244.9 h observed MTBI and 70.3 lost GPU-hours. The actual app capture is linked from the illustrated guide.
+- A regression test loads the frontend bundles and application-owned architecture SVG.
 - Package 1.1.0 built and installed successfully.
 - [GitHub CI](https://github.com/sivalinb/gpu-fleetops/actions/runs/38673271230) passed Python 3.12, Python 3.13 and the full Docker observability-stack smoke job for implementation commit `5cc52df`.
 - The native GPU runner recorded **unavailable** because `dcgmi` is not installed. Native subprocess behavior is fixture-tested; it does not establish physical GPU operation.
