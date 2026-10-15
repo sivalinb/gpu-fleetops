@@ -1,6 +1,7 @@
 """Black-box HTTP check for a running local/container deployment."""
 
 import os
+import re
 
 import httpx
 
@@ -11,8 +12,13 @@ def main():
     with httpx.Client(base_url=url, timeout=60) as client:
         assert client.get("/healthz").status_code == 200
         assert client.get("/readyz").status_code == 200
-        assert client.get("/").status_code == 200
-        assert client.get("/assets/architecture.svg").status_code == 200
+        page = client.get("/")
+        assert page.status_code == 200
+        bundles = re.findall(r'(?:src|href)="(\./assets/[^"?]+\.(?:js|css))"', page.text)
+        assert len(bundles) >= 2
+        for path in bundles:
+            assert client.get(path.removeprefix(".")).status_code == 200
+        assert client.get("/fleetops-assets/architecture.svg").status_code == 200
         session = client.post("/api/v1/sessions", headers=headers)
         session.raise_for_status()
         headers["X-FleetOps-Session"] = session.json()["session_id"]
