@@ -16,9 +16,25 @@ short_description: GPU reliability lab with telemetry, SLOs, and AI investigatio
 
 GPU FleetOps combines a GPU infrastructure catalog, telemetry, request-based SLOs, incident workflows, and an evidence-grounded investigator. The Gradio reliability lab runs on a CPU laptop.
 
-**[Try the Gradio preview](https://0e237eb02efc0198b9.gradio.live)** — temporary; requires the local demo process to remain running. The repository includes reproducible local setup and permanent Docker Space hosting instructions.
+**[Explore the recorded reliability experiment](https://sivalinb.github.io/reliability/gpu-fleetops/)** — permanent browser explorer with calculated synthetic results. Run the Gradio app locally to change the seed, run experiments and exercise incident workflows.
 
 ![GPU FleetOps architecture](src/fleetops/assets/architecture.svg)
+
+## New: fleet reliability intelligence
+
+GPU FleetOps now measures interruption episodes and operating exposure across three fictional CSPs, compares matched cohorts, fits censored survival/Weibull models, evaluates a randomized mitigation, and benchmarks predictive health on a held-out provider and later time.
+
+![Reliability architecture](docs/reliability/figures/architecture.svg)
+
+Start with the **Reliability intelligence** tab, or reproduce the complete evidence:
+
+```bash
+fleetops-reliability replay --seed 2026 --assets 1000 --output reports/reliability
+```
+
+[Illustrated guide](docs/reliability/README.md) · [Measurement contract](docs/reliability/MEASUREMENT.md) · [Recorded results](reports/reliability/TECHNICAL_REVIEW.md) · [Hardware validation](docs/reliability/HARDWARE.md)
+
+All default fleet outcomes and readiness examples are synthetic. Unknown telemetry is excluded from healthy exposure; source records are not treated as interruption counts. A local DCGM validation path is provided for supported hardware.
 
 ## Run the demo
 

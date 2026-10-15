@@ -55,3 +55,21 @@ class FleetOps:
     def close(self):
         self.telemetry.close()
         self.store.close()
+
+    def reliability_replay(self, seed=2026, assets=1000, namespace=None):
+        from .reliability.reporting import build_bundle
+        if namespace is not None:
+            self.session(namespace)
+        started = time.monotonic()
+        with self.telemetry.tracer.start_as_current_span("reliability.replay") as span:
+            span.set_attribute("reliability.origin", "synthetic")
+            span.set_attribute("reliability.assets", assets)
+            result = build_bundle(seed, assets)
+        self.telemetry.reliability_runs.labels("synthetic").inc()
+        self.telemetry.reliability_seconds.observe(time.monotonic()-started)
+        for field in ("interruptions", "operating_hours", "unknown_hours"):
+            self.telemetry.reliability_last.labels(field).set(result["analysis"]["summary"][field])
+        self.telemetry.log("reliability.replay.completed", origin="synthetic", assets=assets, seed=seed)
+        if namespace is not None:
+            self.store.put(namespace, "reliability", dict(id="latest", timestamp=time.time(), **result))
+        return result

@@ -1,0 +1,15 @@
+{
+  "key": "event-1",
+  "target": {
+    "id": "gpu-example"
+  },
+  "incident": "incident-1",
+  "window": [
+    5.0,
+    7.0
+  ],
+  "type": "software",
+  "reason": "LAB_INTERRUPT",
+  "interrupted": true,
+  "origin": "synthetic"
+}

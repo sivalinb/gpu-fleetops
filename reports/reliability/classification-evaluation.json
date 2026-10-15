@@ -1,0 +1,302 @@
+{
+  "origin": "synthetic",
+  "seeds": [
+    2040,
+    2041,
+    2042,
+    2043,
+    2044,
+    2045,
+    2046,
+    2047,
+    2048,
+    2049
+  ],
+  "assets": 1000,
+  "cases": [
+    {
+      "seed": 2040,
+      "domain": "software",
+      "expected": "systemic_candidate",
+      "actual": "systemic_candidate",
+      "passed": true
+    },
+    {
+      "seed": 2040,
+      "domain": "thermal",
+      "expected": "environmental_candidate",
+      "actual": "environmental_candidate",
+      "passed": true
+    },
+    {
+      "seed": 2040,
+      "domain": "interconnect",
+      "expected": "configuration_candidate",
+      "actual": "configuration_candidate",
+      "passed": true
+    },
+    {
+      "seed": 2040,
+      "domain": "memory",
+      "expected": "unresolved",
+      "actual": "unresolved",
+      "passed": true
+    },
+    {
+      "seed": 2041,
+      "domain": "software",
+      "expected": "systemic_candidate",
+      "actual": "systemic_candidate",
+      "passed": true
+    },
+    {
+      "seed": 2041,
+      "domain": "thermal",
+      "expected": "environmental_candidate",
+      "actual": "environmental_candidate",
+      "passed": true
+    },
+    {
+      "seed": 2041,
+      "domain": "interconnect",
+      "expected": "configuration_candidate",
+      "actual": "configuration_candidate",
+      "passed": true
+    },
+    {
+      "seed": 2041,
+      "domain": "memory",
+      "expected": "unresolved",
+      "actual": "unresolved",
+      "passed": true
+    },
+    {
+      "seed": 2042,
+      "domain": "software",
+      "expected": "systemic_candidate",
+      "actual": "systemic_candidate",
+      "passed": true
+    },
+    {
+      "seed": 2042,
+      "domain": "thermal",
+      "expected": "environmental_candidate",
+      "actual": "environmental_candidate",
+      "passed": true
+    },
+    {
+      "seed": 2042,
+      "domain": "interconnect",
+      "expected": "configuration_candidate",
+      "actual": "configuration_candidate",
+      "passed": true
+    },
+    {
+      "seed": 2042,
+      "domain": "memory",
+      "expected": "unresolved",
+      "actual": "unresolved",
+      "passed": true
+    },
+    {
+      "seed": 2043,
+      "domain": "software",
+      "expected": "systemic_candidate",
+      "actual": "systemic_candidate",
+      "passed": true
+    },
+    {
+      "seed": 2043,
+      "domain": "thermal",
+      "expected": "environmental_candidate",
+      "actual": "environmental_candidate",
+      "passed": true
+    },
+    {
+      "seed": 2043,
+      "domain": "interconnect",
+      "expected": "configuration_candidate",
+      "actual": "configuration_candidate",
+      "passed": true
+    },
+    {
+      "seed": 2043,
+      "domain": "memory",
+      "expected": "unresolved",
+      "actual": "unresolved",
+      "passed": true
+    },
+    {
+      "seed": 2044,
+      "domain": "software",
+      "expected": "systemic_candidate",
+      "actual": "systemic_candidate",
+      "passed": true
+    },
+    {
+      "seed": 2044,
+      "domain": "thermal",
+      "expected": "environmental_candidate",
+      "actual": "environmental_candidate",
+      "passed": true
+    },
+    {
+      "seed": 2044,
+      "domain": "interconnect",
+      "expected": "configuration_candidate",
+      "actual": "configuration_candidate",
+      "passed": true
+    },
+    {
+      "seed": 2044,
+      "domain": "memory",
+      "expected": "unresolved",
+      "actual": "unresolved",
+      "passed": true
+    },
+    {
+      "seed": 2045,
+      "domain": "software",
+      "expected": "systemic_candidate",
+      "actual": "systemic_candidate",
+      "passed": true
+    },
+    {
+      "seed": 2045,
+      "domain": "thermal",
+      "expected": "environmental_candidate",
+      "actual": "environmental_candidate",
+      "passed": true
+    },
+    {
+      "seed": 2045,
+      "domain": "interconnect",
+      "expected": "configuration_candidate",
+      "actual": "configuration_candidate",
+      "passed": true
+    },
+    {
+      "seed": 2045,
+      "domain": "memory",
+      "expected": "unresolved",
+      "actual": "unresolved",
+      "passed": true
+    },
+    {
+      "seed": 2046,
+      "domain": "software",
+      "expected": "systemic_candidate",
+      "actual": "systemic_candidate",
+      "passed": true
+    },
+    {
+      "seed": 2046,
+      "domain": "thermal",
+      "expected": "environmental_candidate",
+      "actual": "environmental_candidate",
+      "passed": true
+    },
+    {
+      "seed": 2046,
+      "domain": "interconnect",
+      "expected": "configuration_candidate",
+      "actual": "configuration_candidate",
+      "passed": true
+    },
+    {
+      "seed": 2046,
+      "domain": "memory",
+      "expected": "unresolved",
+      "actual": "unresolved",
+      "passed": true
+    },
+    {
+      "seed": 2047,
+      "domain": "software",
+      "expected": "systemic_candidate",
+      "actual": "systemic_candidate",
+      "passed": true
+    },
+    {
+      "seed": 2047,
+      "domain": "thermal",
+      "expected": "environmental_candidate",
+      "actual": "environmental_candidate",
+      "passed": true
+    },
+    {
+      "seed": 2047,
+      "domain": "interconnect",
+      "expected": "configuration_candidate",
+      "actual": "configuration_candidate",
+      "passed": true
+    },
+    {
+      "seed": 2047,
+      "domain": "memory",
+      "expected": "unresolved",
+      "actual": "unresolved",
+      "passed": true
+    },
+    {
+      "seed": 2048,
+      "domain": "software",
+      "expected": "systemic_candidate",
+      "actual": "systemic_candidate",
+      "passed": true
+    },
+    {
+      "seed": 2048,
+      "domain": "thermal",
+      "expected": "environmental_candidate",
+      "actual": "environmental_candidate",
+      "passed": true
+    },
+    {
+      "seed": 2048,
+      "domain": "interconnect",
+      "expected": "configuration_candidate",
+      "actual": "configuration_candidate",
+      "passed": true
+    },
+    {
+      "seed": 2048,
+      "domain": "memory",
+      "expected": "unresolved",
+      "actual": "unresolved",
+      "passed": true
+    },
+    {
+      "seed": 2049,
+      "domain": "software",
+      "expected": "systemic_candidate",
+      "actual": "systemic_candidate",
+      "passed": true
+    },
+    {
+      "seed": 2049,
+      "domain": "thermal",
+      "expected": "environmental_candidate",
+      "actual": "environmental_candidate",
+      "passed": true
+    },
+    {
+      "seed": 2049,
+      "domain": "interconnect",
+      "expected": "configuration_candidate",
+      "actual": "configuration_candidate",
+      "passed": true
+    },
+    {
+      "seed": 2049,
+      "domain": "memory",
+      "expected": "unresolved",
+      "actual": "unresolved",
+      "passed": true
+    }
+  ],
+  "passed": 40,
+  "total": 40,
+  "accuracy": 1.0,
+  "limits": "Frozen generator-family holdout seeds; no real-customer, novel-failure or causal-classification accuracy claim"
+}

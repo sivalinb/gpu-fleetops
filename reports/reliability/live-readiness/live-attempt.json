@@ -1,0 +1,5 @@
+{
+  "status": "unavailable",
+  "origin": "live_attempt",
+  "reason": "dcgmi is not installed; no physical test ran"
+}

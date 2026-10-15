@@ -24,6 +24,9 @@ class JSONFormatter(logging.Formatter):
 class Telemetry:
     def __init__(self, *, endpoint: str = "", log_path: str = ""):
         self.registry = CollectorRegistry()
+        self.reliability_runs = Counter("fleetops_reliability_runs_total", "Completed reliability analyses", ["origin"], registry=self.registry)
+        self.reliability_seconds = Histogram("fleetops_reliability_duration_seconds", "Reliability replay execution time", registry=self.registry)
+        self.reliability_last = Gauge("fleetops_reliability_last_observation", "Last completed synthetic replay summary; hours or count by field", ["field"], registry=self.registry)
         self._lab_stats = {}
         self._stats_lock = RLock()
         self.requests = Counter("fleetops_inference_requests_total", "Workload requests (synthetic demo unless adapter source is real)", ["service", "outcome"], registry=self.registry)

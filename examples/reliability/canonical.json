@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0",
+  "epoch": "2026-10-01T00:00:00Z",
+  "description": "Operator-supplied reliability observations",
+  "entities": [
+    {
+      "id": "gpu-example",
+      "unit": "gpu",
+      "provider": "csp-aurora",
+      "rack": "rack-a",
+      "node": "node-a",
+      "model": "illustrative-accelerator",
+      "driver": "stable",
+      "firmware": "fw-a",
+      "workload": "training",
+      "age_band": "established",
+      "arm": "observational",
+      "start": 0.0,
+      "stop": 10.0,
+      "exclusions": [
+        {
+          "start": 2.0,
+          "stop": 4.0,
+          "state": "maintenance"
+        },
+        {
+          "start": 6.0,
+          "stop": 8.0,
+          "state": "unknown"
+        }
+      ]
+    }
+  ],
+  "events": [
+    {
+      "id": "event-1",
+      "entity_id": "gpu-example",
+      "incident_key": "incident-1",
+      "start": 5.0,
+      "stop": 7.0,
+      "domain": "software",
+      "signal": "LAB_INTERRUPT",
+      "interrupted": true,
+      "origin": "synthetic"
+    }
+  ]
+}

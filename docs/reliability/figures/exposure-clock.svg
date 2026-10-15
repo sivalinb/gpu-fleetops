@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="370" viewBox="0 0 1200 370"><rect width="1200" height="370" rx="18" fill="#f5f8fb"/><g font-family="Arial,sans-serif"><text x="45" y="55" font-size="27" fill="#142b40" font-weight="700">An explicit exposure clock</text><text x="45" y="90" font-size="17" fill="#53667b">An interruption spans hours 5–7. Coverage becomes unknown at hour 6.</text>
+<rect x="45" y="135" width="217" height="68" rx="5" fill="#248d78"/>
+<text x="53" y="176" fill="#ffffff" font-size="14">Operating</text>
+<rect x="265" y="135" width="217" height="68" rx="5" fill="#8795b1"/>
+<text x="273" y="176" fill="#ffffff" font-size="14">Maintenance</text>
+<rect x="485" y="135" width="107" height="68" rx="5" fill="#248d78"/>
+<text x="493" y="176" fill="#ffffff" font-size="14">Operating</text>
+<rect x="595" y="135" width="107" height="68" rx="5" fill="#e78c55"/>
+<text x="603" y="176" fill="#ffffff" font-size="14">Interrupted</text>
+<rect x="705" y="135" width="217" height="68" rx="5" fill="#655f94"/>
+<text x="713" y="176" fill="#ffffff" font-size="14">Unknown</text>
+<rect x="925" y="135" width="217" height="68" rx="5" fill="#248d78"/>
+<text x="933" y="176" fill="#ffffff" font-size="14">Operating</text>
+<text x="45" y="230" fill="#53667b" font-size="15">0 h</text>
+<text x="155" y="230" fill="#53667b" font-size="15">1 h</text>
+<text x="265" y="230" fill="#53667b" font-size="15">2 h</text>
+<text x="375" y="230" fill="#53667b" font-size="15">3 h</text>
+<text x="485" y="230" fill="#53667b" font-size="15">4 h</text>
+<text x="595" y="230" fill="#53667b" font-size="15">5 h</text>
+<text x="705" y="230" fill="#53667b" font-size="15">6 h</text>
+<text x="815" y="230" fill="#53667b" font-size="15">7 h</text>
+<text x="925" y="230" fill="#53667b" font-size="15">8 h</text>
+<text x="1035" y="230" fill="#53667b" font-size="15">9 h</text>
+<text x="1145" y="230" fill="#53667b" font-size="15">10 h</text>
+<text x="45" y="290" fill="#142b40" font-size="22" font-weight="700">5 operating hours / 1 interruption = 5 hours observed MTBI</text>
+<text x="45" y="327" fill="#53667b" font-size="17">2 maintenance hours + 2 unknown hours + 1 observed lost hour are excluded from operating exposure.</text>
+</g></svg>

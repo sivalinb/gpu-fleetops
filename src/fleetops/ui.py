@@ -32,11 +32,11 @@ CSS = """
 
 HERO = """
 <div class="fleet-hero">
-  <div class="eyebrow">GPU FLEETOPS / RELIABILITY LAB</div>
-  <h1>From a failure signal to verified recovery.</h1>
-  <p>Discover the fleet, watch service objectives, investigate an incident, and verify the fix.
-  Every step leaves evidence you can inspect.</p>
-  <div class="fleet-badges"><span>Isolated session</span><span>Synthetic GPU fleet</span><span>Real CPU workload</span><span>Approved recovery</span></div>
+  <div class="eyebrow">GPU FLEETOPS / RELIABILITY INTELLIGENCE</div>
+  <h1>Understand failures. Measure the improvement.</h1>
+  <p>Compare GPU fleets, quantify interruption risk, and evaluate a controlled mitigation.
+  Follow every conclusion back to its evidence, exposure and uncertainty.</p>
+  <div class="fleet-badges"><span>Three fictional CSPs</span><span>Explicit MTBI methodology</span><span>Controlled experiments</span><span>Evidence you can inspect</span></div>
 </div>
 """
 
@@ -185,6 +185,9 @@ def build_demo(service):
         status = gr.Markdown("Preparing your isolated lab…")
         state = gr.Markdown()
         with gr.Tabs():
+            with gr.Tab("Reliability intelligence"):
+                from .reliability.views import mount
+                replay, replay_seed, replay_assets, replay_outputs = mount(service)
             with gr.Tab("Operations"):
                 gr.HTML('<div class="step-strip"><span>01 · Inject</span><span>02 · Observe</span><span>03 · Investigate</span><span>04 · Approve</span><span>05 · Verify</span></div>')
                 with gr.Row():
@@ -229,6 +232,7 @@ def build_demo(service):
         views = [cards, chart, incidents, inventory, evidence, slo, postmortem, state]
         options = {"api_visibility": "private", "concurrency_id": "fleetops-lab", "concurrency_limit": 4}
         demo.load(presenter.start, [], [namespace, status, *views], **options)
+        demo.load(replay, [replay_seed, replay_assets], replay_outputs, api_visibility="private", concurrency_id="reliability", concurrency_limit=2)
         inject.click(presenter.inject, [namespace, scenario], [status, *views], **options)
         probes.click(presenter.probe, [namespace, count], [status, *views], **options)
         investigate.click(presenter.investigate_ui, [namespace], [analysis, tool_trace, proposal, proposal_id, approval, fix, status, *views], **options)

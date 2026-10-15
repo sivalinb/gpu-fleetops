@@ -1,0 +1,11 @@
+{
+  "event_id": "event-1",
+  "gpu": "gpu-example",
+  "episode": "incident-1",
+  "start_hours": 5.0,
+  "end_hours": 7.0,
+  "domain": "software",
+  "code": "LAB_INTERRUPT",
+  "job_interrupted": true,
+  "origin": "synthetic"
+}

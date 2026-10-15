@@ -1,0 +1,11 @@
+{
+  "id": "event-1",
+  "asset": "gpu-example",
+  "correlation": "incident-1",
+  "begin_seconds": 18000.0,
+  "finish_seconds": 25200.0,
+  "subsystem": "software",
+  "signal": "LAB_INTERRUPT",
+  "impact": "interruption",
+  "provenance": "synthetic"
+}

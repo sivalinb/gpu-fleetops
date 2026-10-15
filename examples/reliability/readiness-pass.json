@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0",
+  "origin": "synthetic",
+  "hardware_id": "LAB-GPU-0000",
+  "driver_version": "illustrative-driver",
+  "dcgm_version": "illustrative-dcgm",
+  "captured_at": "2026-10-01T00:00:00Z",
+  "duration_seconds": 180.0,
+  "coverage_ratio": 0.99,
+  "checks": [
+    {
+      "name": "software",
+      "result": "pass"
+    },
+    {
+      "name": "memory",
+      "result": "pass"
+    },
+    {
+      "name": "targeted_stress",
+      "result": "pass"
+    }
+  ],
+  "raw_sha256": null,
+  "source": "Authored policy fixture; no physical GPU execution"
+}

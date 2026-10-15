@@ -19,6 +19,7 @@ jobs:
       - run: ruff check src tests scripts
       - run: pytest --cov=fleetops --cov-report=xml --cov-report=term-missing --junitxml=test-results/junit.xml
       - run: python scripts/evaluate.py --output reports/ci-evaluation.json
+      - run: python -m fleetops.reliability.cli replay --output reports/reliability-ci
       - uses: actions/upload-artifact@v4
         with:
           name: evidence-python-${{ matrix.python }}
@@ -26,6 +27,7 @@ jobs:
             coverage.xml
             test-results/junit.xml
             reports/ci-evaluation.json
+            reports/reliability-ci/
   container-smoke:
     runs-on: ubuntu-latest
     steps:

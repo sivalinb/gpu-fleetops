@@ -1,0 +1,18 @@
+{
+  "date_local": "2026-10-14",
+  "python": "3.12.14",
+  "tests": 207,
+  "failures": 0,
+  "errors": 0,
+  "line_coverage_percent": 98.32810867293625,
+  "classification": {
+    "passed": 40,
+    "total": 40,
+    "scope": "Ten additional seeds in the same synthetic generator family"
+  },
+  "physical_gpu": "unavailable: dcgmi not installed",
+  "browser_render": "Local browser preview returned a blank page; interactive browser rendering not verified in this run",
+  "ui_contract": "FastAPI TestClient mounts Gradio and exercises callback contracts; HTTP app returns 200",
+  "figures": "Matplotlib SVG/PNG exported; PNG visually inspected",
+  "scope": "New reliability extension results; earlier v1.0 stack CI is historical evidence"
+}

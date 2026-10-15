@@ -21,6 +21,10 @@ from .models import (
     MaintenanceRequest,
     ProbeRequest,
 )
+from .reliability.analysis import analyze
+from .reliability.contracts import Dataset, SimulationRequest
+from .reliability.readiness import DiagnosticEvidence, assess
+from .reliability.reporting import technical_report
 from .service import FleetOps
 from .store import ConflictError
 
@@ -153,6 +157,29 @@ def create_app(settings: Settings | None = None, *, mount_ui: bool = True) -> Fa
         return current.store.list(current.namespace, "evidence", limit=100)
 
     app.mount("/assets", StaticFiles(directory=Path(__file__).parent / "assets"), name="assets")
+    @app.post("/api/v1/reliability/replay")
+    def replay_reliability(payload: SimulationRequest, current=Depends(lab)):
+        return service.reliability_replay(payload.seed, payload.assets, current.namespace)
+
+    @app.post("/api/v1/reliability/analyze")
+    def analyze_reliability(payload: Dataset, unit: str = "gpu", current=Depends(lab)):
+        return analyze(payload, unit)
+
+    @app.get("/api/v1/reliability/latest")
+    def latest_reliability(current=Depends(lab)):
+        report = service.store.get(current.namespace, "reliability", "latest")
+        if report is None:
+            raise HTTPException(404, "Run a reliability replay in this session first")
+        return report
+
+    @app.get("/api/v1/reliability/review", response_class=PlainTextResponse)
+    def reliability_review(current=Depends(lab)):
+        return technical_report(latest_reliability(current))
+
+    @app.post("/api/v1/reliability/readiness")
+    def hardware_readiness(payload: DiagnosticEvidence, current=Depends(lab)):
+        return assess(payload)
+
     if mount_ui:
         import gradio as gr
 
